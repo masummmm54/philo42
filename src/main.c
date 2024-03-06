@@ -6,55 +6,33 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:40:10 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/04 13:49:39 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:20:04 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* int	main(int ac, char **av)
+void	ft_exit(char *msg)
 {
-	if (!(ac == 5 || ac == 6))
-		return (EXIT_FAILURE);
-	av[0] = NULL;
-	ft_printf("masum\n");
-
-	return (EXIT_SUCCESS);
-} */
-
-int primes[10] = {2, 3, 5 , 7, 11, 13, 17, 19, 23, 29};
-
-void *routine(void *arg)
-{
-	sleep(1);
-	int index = *(int *)arg;
-	printf("%d \n", primes[index]);
-
-	return NULL;
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
 }
 
-int main()
+
+int	main(int ac, char **av)
 {
-	pthread_t th[10];
-	int i = 0;
-	while (i < 10)
-	{	
-		int *a = malloc (sizeof(int));
-		*a = i;
-		if (pthread_create(&th[i], NULL, &routine, a) != 0)
-		{
-			perror("failed:");
-		}
-		i++;
-	}
-	i = 0;
-	while (i < 10)
-	{	
-		if (pthread_join(th[i], NULL) != 0)
-		{
-			perror("failed:");
-		}
-		i++;
-	}
-	return (0);
+	t_table	table;
+
+	if (!(ac == 5 || ac == 6))
+		ft_exit("Wrong argument size");
+	if (check_args(av) == FALSE)
+		ft_exit("Numeric arguments required");
+	init_table(av, &table);
+
+
+
+
+
+
+	return (EXIT_SUCCESS);
 }

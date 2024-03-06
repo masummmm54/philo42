@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 12:36:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/04 12:59:05 by muhakose         ###   ########.fr        #
+#    Updated: 2024/03/05 11:43:23 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ NAME = philo
 
 $(NAME) : $(OBJ_DIR) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	echo "$(COLOUR_YELLOW)Minishell compiled successfully!$(COLOUR_END)"
+	echo "$(COLOUR_YELLOW)Philo compiled successfully!$(COLOUR_END)"
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
