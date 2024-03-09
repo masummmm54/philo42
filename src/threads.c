@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:04:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/07 10:27:10 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:32:50 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ void	sleeper(t_philo *philo, long wait)
 			break ;
 		usleep(100);
 	}
-	(void)philo;
 }
 
 void	ft_exit(t_philo *philo, int exit_code)
 {
-
-	printf("i am here %d\n", philo->id + 1);
-	//pthread_detach(philo->table->threads[philo->id]);
-	//free_all(philo->table);
+	free_all(philo->table);
 	exit(exit_code);
 }
 
@@ -65,6 +61,7 @@ int	is_dead(t_philo *philo)
 {
 	bool	how_long;
 
+	pthread_mutex_lock(&philo->table->dead_mtx);
 	how_long = time_now(philo->table) - philo->last_meal > philo->table->time_die / 1000;
 	if (how_long)
 	{
@@ -72,6 +69,7 @@ int	is_dead(t_philo *philo)
 		philo->table->dead = false;
 		return (true);
 	}
+	pthread_mutex_unlock(&philo->table->dead_mtx);
 	return (false);
 }
 
@@ -90,7 +88,8 @@ void	*thread_func(void *table_t)
 		i--;
 		if (i == 0)
 			break;
-		sleepandthink(philo);
+		if (philo->table->dead)
+			sleepandthink(philo);
 	}
 	return (NULL);
 }

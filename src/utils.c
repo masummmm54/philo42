@@ -6,12 +6,33 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:54:35 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/06 16:33:58 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:26:40 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	ft_error(char *msg)
+{
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
+}
+
+void	free_all(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->nbr_philo)
+		pthread_mutex_destroy(&table->forks[i++]);
+	if (table->dead)
+		pthread_mutex_unlock(&table->dead_mtx);
+	pthread_mutex_destroy(&table->dead_mtx);
+	i = 0;
+	free(table->threads);
+	free(table->philos);
+	free(table->forks);
+}
 
 void	printer(char *msg, t_philo *philo)
 {

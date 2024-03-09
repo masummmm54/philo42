@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:40:40 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/07 10:18:02 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:33:00 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_table
 
 void	init_table(char **av, t_table *table);
 void	init_philo(t_philo *philo, int i);
+void	init_launch(t_table *table);
 void	*thread_func(void *table_t);
 void	sleeper(t_philo *philo, long wait);
 int		is_dead(t_philo *philo);
@@ -67,5 +68,6 @@ long	ft_atoi(const char *str);
 int		check_args(char **av);
 void	ft_error(char *msg);
 void	ft_exit(t_philo *philo, int exit_code);
+void	free_all(t_table *table);
 
 #endif
