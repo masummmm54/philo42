@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:40:40 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/12 14:17:35 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:36:53 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	sleeper(t_philo *philo, long wait);
 int		is_dead(t_philo *philo);
 int		check_dead(t_philo *philo, int flag);
 int		all_full(t_table *table);
+void	one_philo(t_philo *philo);
 
 //utils
 time_t	get_time(void);

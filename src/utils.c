@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:54:35 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/12 14:10:56 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:37:37 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
+}
+
+void	one_philo(t_philo *philo)
+{
+	printer("is thinking", philo);
+	pthread_mutex_lock(&philo->table->forks[philo->id]);
+	printer("has taken a fork", philo);
+	pthread_mutex_unlock(&philo->table->forks[philo->id]);
 }

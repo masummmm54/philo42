@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 12:36:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/12 10:19:42 by muhakose         ###   ########.fr        #
+#    Updated: 2024/03/12 14:28:50 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,14 @@ CFLAGS = -Wall -Wextra -Werror -I./include/ -g -pthread
 #CFLAGS +=-g3 -fsanitize=address -fsanitize=undefined
 
 OBJ_DIR = obj
-OBJ = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/*.c)) \
+OBJ = obj/main.o \
+		obj/utils.o \
+		obj/utils2.o \
+		obj/threads.o \
+		obj/monitor.o \
+		obj/launch.o \
+		obj/init.o \
+		obj/free_exit.o \
 
 NAME = philo
 

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:04:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/12 14:22:28 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:36:42 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	*thread_func(void *philo_t)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_t;
+	if (philo->table->nbr_philo == 1)
+		return (one_philo(philo), NULL);
 	if (philo->id % 2 != 0)
 		usleep(1000);
 	while (1)
