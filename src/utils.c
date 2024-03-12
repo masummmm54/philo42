@@ -6,40 +6,20 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:54:35 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/09 13:26:40 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:10:56 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_error(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_all(t_table *table)
-{
-	int	i;
-
-	i = 0;
-	while (i < table->nbr_philo)
-		pthread_mutex_destroy(&table->forks[i++]);
-	if (table->dead)
-		pthread_mutex_unlock(&table->dead_mtx);
-	pthread_mutex_destroy(&table->dead_mtx);
-	i = 0;
-	free(table->threads);
-	free(table->philos);
-	free(table->forks);
-}
-
 void	printer(char *msg, t_philo *philo)
 {
+	pthread_mutex_lock(&philo->table->time_lock);
 	printf("%lu %d %s\n", time_now(philo->table), philo->id + 1, msg);
+	pthread_mutex_unlock(&philo->table->time_lock);
 }
 
-time_t time_now(t_table *table)
+time_t	time_now(t_table *table)
 {
 	return (get_time() - table->day_start);
 }
@@ -52,77 +32,8 @@ time_t	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-int	check_args(char **av)
-{
-	int	i;
-	int	m;
-
-	i = 1;
-	while (av[i])
-	{
-		m = 0;
-		while (av[i][m])
-		{
-			if (ft_isdigit(av[i][m]) == FALSE)
-				return (FALSE);
-			m++;
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	x;
-
-	x = 0;
-	while (s[x] != '\0')
-		x++;
-	return (x);
-}
-
 void	ft_putendl_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
-}
-
-int	iswhitespace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\f'
-		|| c == '\v' || c == '\r')
-		return (1);
-	return (0);
-}
-
-long	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	num;
-
-	if (str == NULL)
-		return (0);
-	num = 0;
-	sign = 1;
-	i = 0;
-	while (iswhitespace(str[i]))
-		i++;
-	if (str[i] == '-')
-		sign = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] != '\0' && ft_isdigit(str[i]))
-	{
-		num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	num = num * sign;
-	return (num);
 }

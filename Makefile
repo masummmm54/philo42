@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 12:36:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/09 13:31:43 by muhakose         ###   ########.fr        #
+#    Updated: 2024/03/12 10:19:42 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,21 +33,6 @@ CFLAGS = -Wall -Wextra -Werror -I./include/ -g -pthread
 OBJ_DIR = obj
 OBJ = $(patsubst src/%.c,$(OBJ_DIR)/%.o,$(wildcard src/*.c)) \
 
-VALGRIND_ENABLED = 1
-
-VALGRIND_CMD = valgrind
-VALGRIND_OPTS = valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes
-
-TARGET = philo
-
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
-
-
-run_valgrind: $(TARGET)
-	@echo "Running $(TARGET) with Valgrind..."
-	$(VALGRIND_CMD) $(VALGRIND_OPTS) ./$(TARGET) 3 600 350 400 5
-
 NAME = philo
 
 $(NAME) : $(OBJ_DIR) $(OBJ)
@@ -72,12 +57,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-valgrind:
-	$(MAKE) run_valgrind
-
-.PHONY: show_errors
-show_errors:
-	$(VALGRIND_CMD) $(VALGRIND_OPTS) --log-file=valgrind_errors.txt ./$(TARGET)
-	cat valgrind_errors.txt
-	rm -f valgrind_errors.txt
