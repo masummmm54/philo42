@@ -6,7 +6,7 @@
 #    By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 12:36:50 by muhakose          #+#    #+#              #
-#    Updated: 2024/03/13 10:41:21 by muhakose         ###   ########.fr        #
+#    Updated: 2024/03/13 11:21:31 by muhakose         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,11 @@ COLOUR_END = \033[0m
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/ -g -pthread
-#CFLAGS +=-g3 -fsanitize=address -fsanitize=undefined
+
+SRC = main.c utils.c utils2.c threads.c monitor.c launch.c init.c free_exit.c
 
 OBJ_DIR = obj
-OBJ = obj/main.o \
-		obj/utils.o \
-		obj/utils2.o \
-		obj/threads.o \
-		obj/monitor.o \
-		obj/launch.o \
-		obj/init.o \
-		obj/free_exit.o \
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 NAME = philo
 
@@ -49,7 +43,7 @@ $(NAME) : $(OBJ_DIR) $(OBJ)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: src/%.c
+$(OBJ_DIR)/%.o: ./src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
