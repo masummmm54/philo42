@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:04:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 15:13:35 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:21:46 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->forks[philo->right]);
 	pthread_mutex_unlock(&philo->table->forks[philo->id]);
 }
-
 
 void	sleeps(t_philo *philo)
 {
