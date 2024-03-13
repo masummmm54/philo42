@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:40:40 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 11:09:27 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:17:49 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct s_table
 };
 
 //table
-void	init_table(char **av, t_table *table);
+int		init_table(char **av, t_table *table);
 void	init_philo(t_philo *philo, t_table *table, int i);
 int		init_lunch(t_table *table);
 int		init_mutex(t_table *table);

@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:57:11 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 09:38:49 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:58:07 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	is_dead(t_philo *philo)
 		pthread_mutex_lock(&philo->table->dead_lock);
 		philo->table->dead = false;
 		pthread_mutex_unlock(&philo->table->dead_lock);
-		printer("is dead", philo);
+		printf("%lu %d is dead\n", time_now(philo->table), philo->id + 1);
 		return (true);
 	}
 	return (false);
