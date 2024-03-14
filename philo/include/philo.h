@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:40:40 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 15:17:49 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:23:43 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	int					left;
 	int					right;
 	int					eat_count;
+	int					nbr_philo;
 	long				last_meal;
 	pthread_t			thread;
 	t_table				*table;
@@ -64,7 +65,7 @@ int		init_join(t_table *table);
 int		thread_create(t_table *table);
 void	*thread_func(void *philo_t);
 void	*monitor(void *table_t);
-void	sleeper(t_philo *philo, long wait);
+void	sleeper(long wait);
 int		is_dead(t_philo *philo);
 int		check_dead(t_philo *philo, int flag);
 int		all_full(t_table *table);

@@ -6,25 +6,21 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:04:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 15:21:46 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:45:25 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	sleeper(t_philo *philo, long wait)
+void	sleeper(long wait)
 {
 	long	begin;
 	long	isenough;
 
-	pthread_mutex_lock(&philo->table->time_lock);
 	begin = get_time();
-	pthread_mutex_unlock(&philo->table->time_lock);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->table->time_lock);
 		isenough = get_time() - begin;
-		pthread_mutex_unlock(&philo->table->time_lock);
 		if (isenough >= wait)
 			break ;
 		usleep(250);
@@ -34,25 +30,15 @@ void	sleeper(t_philo *philo, long wait)
 void	eating(t_philo *philo)
 {
 	printer("is thinking", philo);
-	if (philo->id < philo->right)
-	{
-		pthread_mutex_lock(&philo->table->forks[philo->id]);
-		printer("has taken a fork", philo);
-		pthread_mutex_lock(&philo->table->forks[philo->right]);
-		printer("has taken a fork", philo);
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->table->forks[philo->right]);
-		printer("has taken a fork", philo);
-		pthread_mutex_lock(&philo->table->forks[philo->id]);
-		printer("has taken a fork", philo);
-	}
+	pthread_mutex_lock(&philo->table->forks[philo->id]);
+	printer("has taken a fork", philo);
+	pthread_mutex_lock(&philo->table->forks[philo->right]);
+	printer("has taken a fork", philo);
 	printer("is eating", philo);
 	pthread_mutex_lock(&philo->table->time_lock);
 	philo->last_meal = time_now(philo->table);
 	pthread_mutex_unlock(&philo->table->time_lock);
-	sleeper(philo, philo->table->time_eat);
+	sleeper(philo->table->time_eat);
 	pthread_mutex_unlock(&philo->table->forks[philo->right]);
 	pthread_mutex_unlock(&philo->table->forks[philo->id]);
 }
@@ -60,7 +46,7 @@ void	eating(t_philo *philo)
 void	sleeps(t_philo *philo)
 {
 	printer("is sleeping", philo);
-	sleeper(philo, philo->table->time_sleep);
+	sleeper(philo->table->time_sleep);
 }
 
 void	*thread_func(void *philo_t)

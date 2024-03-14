@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:05:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/13 15:16:59 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:24:02 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	init_table(char **av, t_table *table)
 void	init_philo(t_philo *philo, t_table *table, int i)
 {
 	philo->id = i;
+	philo->nbr_philo = table->nbr_philo;
 	if (-1 == i - 1)
 	{
 		philo->left = table->nbr_philo - 1;
