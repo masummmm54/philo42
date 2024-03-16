@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:04:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/14 13:45:25 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:43:39 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*thread_func(void *philo_t)
 		pthread_mutex_lock(&philo->table->eat_lock);
 		philo->eat_count--;
 		pthread_mutex_unlock(&philo->table->eat_lock);
+		sleeps(philo);
 		pthread_mutex_lock(&philo->table->dead_lock);
 		if (philo->eat_count == 0 || philo->table->dead == false)
 		{
@@ -71,7 +72,6 @@ void	*thread_func(void *philo_t)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->table->dead_lock);
-		sleeps(philo);
 	}
 	return (NULL);
 }

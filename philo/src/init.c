@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:05:25 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/14 13:24:02 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:24:10 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	init_table(char **av, t_table *table)
 {
 	table->nbr_philo = ft_atoi(av[1]);
+	if (table->nbr_philo > 200)
+		return (1);
 	table->time_die = ft_atoi(av[2]);
 	table->time_eat = ft_atoi(av[3]);
 	table->time_sleep = ft_atoi(av[4]);
